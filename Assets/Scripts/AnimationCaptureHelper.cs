@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEditor;
 
 /// <summary>
 /// A component used to help capture FBX animations into sprite sheets.
@@ -55,7 +56,7 @@ public class AnimationCaptureHelper : MonoBehaviour
         }
         else
         {
-            _sourceClip.SampleAnimation(_target, time);
+            AnimationMode.SampleAnimationClip(_target, _sourceClip, time);
         }
     }
 
@@ -69,6 +70,7 @@ public class AnimationCaptureHelper : MonoBehaviour
     /// </summary>
     public IEnumerator CaptureAnimation(Action<Texture2D, Texture2D> onComplete)
     {
+        AnimationMode.StartAnimationMode();
         if (_sourceClip == null || _target == null)
         {
             Debug.LogWarning("CaptureCamera should be set before capturing animation!");
@@ -146,6 +148,7 @@ public class AnimationCaptureHelper : MonoBehaviour
             _captureCamera.targetTexture = null;
             _captureCamera.backgroundColor = cachedCameraColor;
             DestroyImmediate(rtFrame);
+            AnimationMode.StopAnimationMode();
         }
     }
 

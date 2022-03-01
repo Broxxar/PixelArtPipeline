@@ -15,11 +15,6 @@ public class AnimationCaptureHelperEditor : Editor
     private const string ASSIGN_REFS_INFO = "Assign the Target and SourceClip to start previewing!";
 
     /// <summary>
-    /// A message displayed when the assigned animation is not marked as legacy (required for SampleAnimation).
-    /// </summary>
-    private const string LEGACY_ANIM_WARN = "The SourceClip must be marked as Legacy!";
-
-    /// <summary>
     /// A message displayed when the capture camera isn't assigned yet.
     /// </summary>
     private const string ASSIGN_CAMERA_INFO = "Assign a camera to start capturing!";
@@ -52,11 +47,6 @@ public class AnimationCaptureHelperEditor : Editor
             }
 
             var sourceClip = (AnimationClip)sourceClipProp.objectReferenceValue;
-            if (!sourceClip.legacy)
-            {
-                EditorGUILayout.HelpBox(LEGACY_ANIM_WARN, MessageType.Warning);
-                return;
-            }
 
             using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
             {
